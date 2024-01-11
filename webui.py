@@ -302,7 +302,7 @@ with shared.gradio_root:
                         base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
                         refiner_model = gr.Dropdown(label='Refiner (SDXL or SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
                         with gr.Column():
-                            download_lora = gr.Textbox(label='Download Lora', value='https://civitai.com/api/download/models/268010', placeholder="https://civitai.com/api/download/models/268010" show_label=True)
+                            download_lora = gr.Textbox(label='Download Lora', value='https://civitai.com/api/download/models/268010', placeholder="https://civitai.com/api/download/models/268010", show_label=True)
                             download_lora_btn = gr.Button(label='Download ckpt')
                             download_lora_btn.click(download_lora_func, inputs=download_lora, outputs=None,)
                             
