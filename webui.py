@@ -23,10 +23,10 @@ from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
 
 def download_lora_func(model_url):
-    os.system(f"wget {model_url} -P /content/Fooocus/models/loras/")
+    os.system(f"wget {model_url} -P /content/Fooocus/models/loras/ --content-disposition")
 
 def download_ckpt_func(model_url):
-    os.system(f"wget {model_url} -P /content/Fooocus/models/checkpoints/")
+    os.system(f"wget {model_url} -P /content/Fooocus/models/checkpoints/ --content-disposition")
 
 def generate_clicked(*args):
     import ldm_patched.modules.model_management as model_management
