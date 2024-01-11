@@ -22,6 +22,11 @@ from modules.private_logger import get_current_html_path
 from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
 
+def download_lora_func(model_url):
+    os.system(f"wget {model_url} -P /content/Fooocus/models/loras/")
+
+def download_ckpt_func(model_url):
+    os.system(f"wget {model_url} -P /content/Fooocus/models/checkpoints/")
 
 def generate_clicked(*args):
     import ldm_patched.modules.model_management as model_management
@@ -296,6 +301,15 @@ with shared.gradio_root:
                     with gr.Row():
                         base_model = gr.Dropdown(label='Base Model (SDXL only)', choices=modules.config.model_filenames, value=modules.config.default_base_model_name, show_label=True)
                         refiner_model = gr.Dropdown(label='Refiner (SDXL or SD 1.5)', choices=['None'] + modules.config.model_filenames, value=modules.config.default_refiner_model_name, show_label=True)
+                        with gr.Column():
+                            download_lora = gr.Textbox(label='Download Lora', value='', show_label=True)
+                            download_lora_btn = gr.Button(label='Download ckpt')
+                            download_lora_btn.click(download_lora_func, inputs=download_lora, outputs=None,)
+                            
+                        with gr.Column():
+                            download_ckpt = gr.Textbox(label='Download Checkpoint', value='', show_label=True)
+                            download_ckpt_btn = gr.Button(label='Download ckpt')
+                            download_ckpt_btn.click(download_ckpt_func, inputs=download_ckpt, outputs=None, )
 
                     refiner_switch = gr.Slider(label='Refiner Switch At', minimum=0.1, maximum=1.0, step=0.0001,
                                                info='Use 0.4 for SD1.5 realistic models; '
